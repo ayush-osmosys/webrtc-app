@@ -4,7 +4,7 @@ import cors from "cors";
 import { Server } from "socket.io";
 
 import env from "./env.config.js";
-import homeRouter from "./routes/home.js";
+import { roomHandler } from "./room/index.js";
 
 const PORT = env.PORT;
 const app = express();
@@ -16,13 +16,11 @@ const io = new Server(server, {
   },
 });
 
-// app.use(cors);
-app.set("view engine", "ejs");
-app.use(express.static("public"));
-app.use(homeRouter);
+app.use(cors);
 
 server.listen(PORT, () => console.log("listening on port " + PORT));
 io.on("connection", (socket) => {
   console.log("A Connection established");
+  roomHandler(socket);
   socket.on("disconnect", () => console.log("Disconnected"));
 });

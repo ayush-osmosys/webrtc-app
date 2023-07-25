@@ -17,6 +17,6 @@
     "noUnusedParameters": true,
     "forceConsistentCasingInFileNames": true
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "public"],
   "exclude": ["node_modules", "dist"]
 }
